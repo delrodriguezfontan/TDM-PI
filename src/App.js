@@ -1,24 +1,22 @@
 import './App.css';
 import Header from "./components/Header/Header";
+import React from 'react';
 
 
 function App() {
-  
   return (
 
-    <React.Fragment>
-    <div className="container">
+   <article className="container" >
        <h1>UdeSA Movies</h1>
       
 
         <Header /> 
 
     
-    <div/>
+    </article>
 
-    <React.Fragment/>
-    );
-};
+    )
+} 
 
 
 
