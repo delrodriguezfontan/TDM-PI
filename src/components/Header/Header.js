@@ -24,7 +24,7 @@ function Header(){
             </li>
         </ul>
     </nav>
-    );
+    )
 }
 
 export default Header;
