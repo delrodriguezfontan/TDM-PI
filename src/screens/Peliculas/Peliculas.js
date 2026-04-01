@@ -1,3 +1,6 @@
+import React, { Component } from "react";
+
+
 function Peliculas() {
   return (
     <React.Fragment> 

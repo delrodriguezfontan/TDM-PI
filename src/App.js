@@ -3,7 +3,7 @@ import Header from "./components/Header/Header";
 import React from 'react';
 import Footer from './components/Footer/Footer';
 import Buscador from './components/Buscador/Buscador';
-import Home from './components/Home/Home';
+import Peliculas from './screens/Peliculas/Peliculas';
 
 
 function App() {
@@ -18,31 +18,15 @@ function App() {
     <Buscador />
 
         <h2 className="alert alert-primary">Popular movies this week</h2>
-        <Home /> 
-        <Home />
-        <Home />
-        <Home />
+        <Peliculas/>
 
-        <h2 class="alert alert-warning">Popular TV shows this week</h2>
-        <Home />
-        <Home />
-        <Home />
-        <Home />
+        <h2 className="alert alert-warning">Popular TV shows this week</h2>
+        <Peliculas/>
+
+        
 
 
     </body>
-
-
-
-
-
-
-
-
-
-
-
-
 
     <Footer />
 </React.Fragment>
