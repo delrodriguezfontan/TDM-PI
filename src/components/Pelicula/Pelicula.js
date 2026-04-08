@@ -16,6 +16,28 @@ class Pelicula extends Component {
     });
   };
 
+  agregarFavoritos(){
+    let pelicula = this.props.pelicula;
+
+    let favorito = {
+      id: pelicula.id,
+      type: "movie",
+      titulo: pelicula.title,
+      image: pelicula.poster_path,
+
+    };
+
+
+    let favoritosStorage = localStorage.getItem('favorito');
+    let favoritos = [];
+
+    if (favoritoStorage !== null) {
+      favoritos = JSON.parse(favoritosStorage);
+    }
+    
+
+  }
+
   render() {
     let claseName = "hide";
     let textoBoton = "Ver más";
@@ -48,6 +70,8 @@ class Pelicula extends Component {
         <button onClick={this.cambiarVerMas}>
           {textoBoton}
         </button>
+
+        <button onClick={this.agregarFavoritos}>Agregar a favoritos</button>
 
         <section className={claseName}>
           <p>{pelicula.overview}</p>
