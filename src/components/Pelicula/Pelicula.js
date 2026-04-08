@@ -1,0 +1,85 @@
+import React, { Component } from "react";
+import { Link } from "react-router-dom";
+
+class Pelicula extends Component {
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      verMas: false
+    };
+  }
+
+  cambiarVerMas = () => {
+    this.setState({
+      verMas: !this.state.verMas
+    });
+  };
+
+  agregarFavoritos(){
+    let pelicula = this.props.pelicula;
+
+    let favorito = {
+      id: pelicula.id,
+      type: "movie",
+      titulo: pelicula.title,
+      image: pelicula.poster_path,
+
+    };
+
+
+    let favoritosStorage = localStorage.getItem('favorito');
+    let favoritos = [];
+
+    if (favoritoStorage !== null) {
+      favoritos = JSON.parse(favoritosStorage);
+    }
+    
+
+  }
+
+  render() {
+    let claseName = "hide";
+    let textoBoton = "Ver más";
+    let pelicula = this.props.pelicula;
+
+    if (!pelicula) {
+      return <p>Cargando...</p>;
+    }
+
+    if (this.state.verMas) {
+      claseName = "show";
+      textoBoton = "Ver menos";
+    }
+
+    return (
+      <article className="pelicula-card">
+
+        <Link to={`/pelicula/id/${pelicula.id}`}>
+          <img
+            src={`https://image.tmdb.org/t/p/w500${pelicula.poster_path}`}
+            alt={pelicula.title}
+          />
+
+          <h2>{pelicula.title}</h2>
+        </Link>
+
+        <p>Rating: {pelicula.vote_average}</p>
+        <p>Fecha: {pelicula.release_date}</p>
+
+        <button onClick={this.cambiarVerMas}>
+          {textoBoton}
+        </button>
+
+        <button onClick={this.agregarFavoritos}>Agregar a favoritos</button>
+
+        <section className={claseName}>
+          <p>{pelicula.overview}</p>
+        </section>
+
+      </article>
+    );
+  }
+}
+
+export default Pelicula;
