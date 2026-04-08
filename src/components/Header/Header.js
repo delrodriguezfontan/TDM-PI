@@ -1,26 +1,27 @@
 import React from "react";
+import {Link} from "react-router-dom";
 
 function Header(){
     return (
         <nav>
         <ul class="nav nav-tabs my-4">
             <li className="nav-item">
-                <a className="nav-link" href="index.html">Home</a>
+                <Link to = "index.html" className="nav-link" >Home</Link>
             </li>
             <li className="nav-item">
-                <a className="nav-link" href="movies.html">Películas</a>
+                <Link to = "movies.html" className="nav-link">Películas</Link>
             </li>
             <li className="nav-item">
-                <a className="nav-link" href="series.html">Series</a>
+                <Link to = "series.html"  className="nav-link">Series</Link>
             </li>
             <li className="nav-item">
-                <a className="nav-link" href="favorites.html">Favoritas</a>
+                <Link to ="favorites.html"  className="nav-link">Favoritas</Link>
             </li>
             <li className="nav-item ml-auto">
-                <a className="nav-link" href="register.html">Registro</a>
+                <Link to = "register.html"  className="nav-link">Registro</Link>
             </li>
             <li className="nav-item">
-                <a className="nav-link" href="login.html">Login</a>
+                <Link to ="login.html"  className="nav-link">Login</Link>
             </li>
         </ul>
     </nav>
