@@ -5,7 +5,7 @@ import { Switch, Route, Router } from "react-router-dom";
 import Footer from "./components/Footer/Footer";
 import Buscador from "./components/Buscador/Buscador";
 import Peliculas from "./screens/Peliculas/Peliculas";
-import Resultados from "./screens/Resultados/Resultados";
+import Resultados from "./components/Resultados/Resultados"
 import Home from './screens/Home/Home';
 import Series from "./screens/Series/Series";
 
@@ -29,7 +29,7 @@ class App  extends Component {
       </Switch>
 
       <Footer />
-      
+
       </React.Fragment>
       </Router>
     )

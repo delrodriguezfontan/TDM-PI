@@ -9,10 +9,6 @@ class Pelicula extends Component {
       verMas: false,
       esFavorito: false,
     };
-
-    let favoritos = localStorage.getItem("favoritosPeliculas") == null ? [] : JSON.parse(localStorage.getItem("favoritosPeliculas")); 
-    favoritos.map(id => {if (id === this.props.pelicula.id) this.setState({esFavorito: true}); 
-    });
   
   }
 
@@ -23,22 +19,16 @@ class Pelicula extends Component {
   };
 
   agregarFavoritos(){
+
     let favoritos = localStorage.getItem("favoritosPeliculas") == null ? [] : JSON.parse(localStorage.getItem("favoritosPeliculas")); 
     
     if (this.state.esFavorito){
-      let favoritosNuevos = [];
-      
-      favoritos.map(id => {
-        id !== this.props.pelicula.id ? favoritosNuevos.push(id) : null;
-      });
+      let favoritosNuevos = favoritos.filter(id => {id !== this.props.pelicula.id })
 
-      localStorage.setItem("favoritosPeliculas", JSON.stringify(favoritosNuevos));
-
-    }else{
-      favoritos.push(this.props.pelicula.id);
       localStorage.setItem("favoritosPeliculas", JSON.stringify(favoritos));
 
     }
+    
     this.setState({esFavorito: !this.state.esFavorito});
 
 }
