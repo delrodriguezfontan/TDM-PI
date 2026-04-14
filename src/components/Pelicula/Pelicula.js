@@ -6,37 +6,42 @@ class Pelicula extends Component {
     super(props);
 
     this.state = {
-      verMas: false
+      verMas: false,
+      esFavorito: false,
     };
+
+    let favoritos = localStorage.getItem("favoritosPeliculas") == null ? [] : JSON.parse(localStorage.getItem("favoritosPeliculas")); 
+    favoritos.map(id => {if (id === this.props.pelicula.id) this.setState({esFavorito: true}); 
+    });
+  
   }
 
-  cambiarVerMas = () => {
+  cambiarVerMas () {
     this.setState({
       verMas: !this.state.verMas
     });
   };
 
   agregarFavoritos(){
-    let pelicula = this.props.pelicula;
-
-    let favorito = {
-      id: pelicula.id,
-      type: "movie",
-      titulo: pelicula.title,
-      image: pelicula.poster_path,
-
-    };
-
-
-    let favoritosStorage = localStorage.getItem('favorito');
-    let favoritos = [];
-
-    if (favoritoStorage !== null) {
-      favoritos = JSON.parse(favoritosStorage);
-    }
+    let favoritos = localStorage.getItem("favoritosPeliculas") == null ? [] : JSON.parse(localStorage.getItem("favoritosPeliculas")); 
     
+    if (this.state.esFavorito){
+      let favoritosNuevos = [];
+      
+      favoritos.map(id => {
+        id !== this.props.pelicula.id ? favoritosNuevos.push(id) : null;
+      });
 
-  }
+      localStorage.setItem("favoritosPeliculas", JSON.stringify(favoritosNuevos));
+
+    }else{
+      favoritos.push(this.props.pelicula.id);
+      localStorage.setItem("favoritosPeliculas", JSON.stringify(favoritos));
+
+    }
+    this.setState({esFavorito: !this.state.esFavorito});
+
+}
 
   render() {
     let claseName = "hide";
@@ -67,11 +72,12 @@ class Pelicula extends Component {
         <p>Rating: {pelicula.vote_average}</p>
         <p>Fecha: {pelicula.release_date}</p>
 
-        <button onClick={this.cambiarVerMas}>
+        <button onClick={this.cambiarVerMas()}>
           {textoBoton}
         </button>
 
-        <button onClick={this.agregarFavoritos}>Agregar a favoritos</button>
+        <button onClick={this.agregarFavoritos()}>Agregar a favoritos</button>
+
 
         <section className={claseName}>
           <p>{pelicula.overview}</p>
@@ -79,7 +85,9 @@ class Pelicula extends Component {
 
       </article>
     );
-  }
+  };
 }
+
+
 
 export default Pelicula;
