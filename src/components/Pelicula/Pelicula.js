@@ -24,13 +24,17 @@ class Pelicula extends Component {
     
     if (this.state.esFavorito){
       let favoritosNuevos = favoritos.filter(id => {id !== this.props.pelicula.id })
-
+      
       localStorage.setItem("favoritosPeliculas", JSON.stringify(favoritos));
-
+      this.setState({esFavorito: false });
+   
+    }else{
+      favoritos.push(this.props.pelicula.id);
+      localStorage.setItem("favoritosPeliculas", JSON.stringify(favoritos));
+      this.setState({esFavorito: true});
     }
     
-    this.setState({esFavorito: !this.state.esFavorito});
-
+  
 }
 
   render() {
