@@ -3,17 +3,37 @@ import React, { Component } from "react";
 class CardPelicula extends Component {
     constructor(props){
         super(props)
+        this.state = {
+            textoBoton: "Ver más",
+            textoClase: "Ocultar"
+        }
     }
+
+    cambiarTexto(){
+        if (this.state.textoBoton == "Ver más"){
+            this.setState({
+                textoBoton: "Ver menos",
+                textoClase: ""
+            })
+        }
+        else{
+            this.setState({
+                textoBoton: "Ver más",
+                textoClase: "Ocultar"
+
+            })
+        }
+    }
+
     render(){
         return(
-            <article class="single-card-movie">
-            <img src="https://image.tmdb.org/t/p/w500/9PXZIUsSDh4alB80jheWX4fhZmy.jpg" class="card-img-top"
-                alt="..."/>
-            <div class="cardBody">
-                <h5 class="card-title">{this.props.informacion.title}</h5>
-                <p class="card-text">{this.props.informacion.overview}</p>
-                <a href="movie.html" class="btn btn-primary">Ver más</a>
-                <a href="" class="btn alert-primary">♥️</a>
+            <article className="single-card-movie">
+            <img src={this.props.informacion.poster_path} class="card-img-top"
+                alt={this.props.informacion.title}/>
+            <div className="cardBody">
+                <h5 className="card-title">{this.props.informacion.title}</h5>
+                <p className={"card-text " + this.state.textoClase} >{this.props.informacion.overview}</p>
+               <button onClick={()=> this.cambiarTexto()}>{this.state.textoBoton}</button>
             </div>
         </article>
         )

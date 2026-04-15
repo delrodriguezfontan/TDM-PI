@@ -3,7 +3,6 @@ import Header from "./components/Header/Header";
 import React, {Component} from "react";
 import { Switch, Route, Router } from "react-router-dom";
 import Footer from "./components/Footer/Footer";
-import Buscador from "./components/Buscador/Buscador";
 import Peliculas from "./screens/Peliculas/Peliculas";
 import Resultados from "./components/Resultados/Resultados"
 import Home from './screens/Home/Home';
@@ -35,8 +34,5 @@ class App  extends Component {
     )
   }
 }
-
-
-
 
 export default App;
