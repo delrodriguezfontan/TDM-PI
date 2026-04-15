@@ -1,4 +1,20 @@
-import React from "react";
+import React, { Component } from "react";
+
+class Series extends Component {
+    constructor(props){
+        super(props)
+
+        this.state();
+
+    }
+
+
+    render() {
+        return(
+            <p>Series</p>
+        )
+    
+}
 
 function Series() {
   return (

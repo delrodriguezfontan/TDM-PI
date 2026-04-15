@@ -26,9 +26,4 @@ class Resultados extends Component {
 }
 
 
-
-
-
-
-
 export default Resultados;
