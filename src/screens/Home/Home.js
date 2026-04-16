@@ -1,59 +1,13 @@
 import React, { Component } from "react";
-import Buscador from "../../components/Buscador/Buscador";
+
 import Peliculas from "../Peliculas/Peliculas";
 import Series from "../Series/Series";
 import {Link} from "react-router-dom";
 import CardPelicula from "../../components/CardPelicula/CardPelicula";
+import Formulario from "../../components/Formulario/Formulario";
 
 // Formulario de buscador 
-class Formulario extends Component { 
-    constructor(props) {
-        super(props); 
 
-        this.state = {
-            busqueda: "",
-            tipo: "movie",
-            listaPeliculas: [],
-            listaSeries: []
-        };
-    }
-
-    controlarCambios(event) {
-        this.setState({ [event.target.name]: event.target.value });
-
-    }
-
-    evitarSubmit(event) {
-        event.preventDefault();
-
-    }
-
-    render(){
-        return (
-            <form onSubmit={(event)=> this.evitarSubmit(event)}>
-                <select 
-                    name="tipo" 
-                    onChange={(event) => this.controlarCambios(event)} 
-                    value = {this.state.tipo}>
-
-                    <option value = "movie"> Pelicula</option>
-                    <option value = "tv"> Serie </option>
-                </select>
-
-                <input 
-                    type="text" 
-                    name="busqueda" 
-                    onChange= {(event) => this.controlarCambios(event)} 
-                    value={this.state.busqueda} 
-                    placeholder="Buscar..." />
-                
-                <Link to={`/resultados/${this.state.tipo}/${this.state.busqueda}`}>
-                     Buscar
-                </Link>
-            </form> 
-        );
-    }
-}
 
 
 
@@ -62,9 +16,10 @@ class Formulario extends Component {
 class Home extends Component {
     constructor(props){
         super(props)
-        this.state({peliculas: [],
+        this.state= {
+            peliculas: [],
                     series: [],
-        })
+        }
     }
 
     componentDidMount(){
@@ -76,7 +31,7 @@ class Home extends Component {
             .then((data) => {
                 console.log(data);
                 this.setState({
-                    listaPeliculas: data.results
+                    peliculas: data.results
                 })
             })
             .catch((error) => {
@@ -102,11 +57,11 @@ class Home extends Component {
     render(){
         return (
             <main>
-                <Buscador /> 
+                <Formulario/>
                 <h2 className="alert alert-primary">Películas populares</h2>
                 <section class="row cards" id="movies">
-                {this.state.listaPeliculas.length === 0 ? <h3>Cargando...</h3> : 
-                this.state.listaPeliculas.map(pelicula => <CardPelicula informacion={pelicula} />)
+                {this.state.peliculas.length === 0 ? <h3>Cargando...</h3> : 
+                this.state.peliculas.map(pelicula => <CardPelicula informacion={pelicula} />)
                 }
                 </section>
                 <h2 className="alert alert-primary">Series populares</h2>

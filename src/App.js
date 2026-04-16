@@ -1,24 +1,26 @@
-import "./App.css";
+
 import Header from "./components/Header/Header";
 import React, {Component} from "react";
-import { Switch, Route, Router } from "react-router-dom";
+
 import Footer from "./components/Footer/Footer";
-import Buscador from "./components/Buscador/Buscador";
+
 import Peliculas from "./screens/Peliculas/Peliculas";
-import Resultados from "./components/Resultados/Resultados"
+import Resultados from "./screens/Resultados/Resultados"
 import Home from './screens/Home/Home';
 import Series from "./screens/Series/Series";
+import { Route , Switch} from "react-router-dom";
 
 
 class App  extends Component {
   render() {
     return (
-      <Router>
+
       <React.Fragment>
       <header className="container">
         <h1>UdeSA Movies</h1>
         <Header />
       </header>
+
 
       <Switch> 
         <Route path="/" exact={true} component={Home} />
@@ -31,7 +33,7 @@ class App  extends Component {
       <Footer />
 
       </React.Fragment>
-      </Router>
+
     )
   }
 }

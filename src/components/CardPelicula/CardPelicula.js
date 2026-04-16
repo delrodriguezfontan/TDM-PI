@@ -1,9 +1,14 @@
 import React, { Component } from "react";
+import { Link } from "react-router-dom";
 
 class CardPelicula extends Component {
     constructor(props){
         super(props)
+        this.state = {}
     }
+
+
+    
     render(){
         return(
             <article class="single-card-movie">
@@ -13,7 +18,7 @@ class CardPelicula extends Component {
                 <h5 class="card-title">{this.props.informacion.title}</h5>
                 <p class="card-text">{this.props.informacion.overview}</p>
                 <a href="movie.html" class="btn btn-primary">Ver más</a>
-                <a href="" class="btn alert-primary">♥️</a>
+                <Link href="" class="btn alert-primary">♥️</Link>
             </div>
         </article>
         )
