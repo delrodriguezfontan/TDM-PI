@@ -28,7 +28,7 @@ class CardPelicula extends Component {
     render(){
         return(
             <article className="single-card-movie">
-            <img src={this.props.informacion.poster_path} class="card-img-top"
+            <img src={`https://image.tmdb.org/t/p/w500/${this.props.informacion.poster_path}`} className="card-img-top"
                 alt={this.props.informacion.title}/>
             <div className="cardBody">
                 <h5 className="card-title">{this.props.informacion.title}</h5>

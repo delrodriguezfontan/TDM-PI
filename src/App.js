@@ -12,7 +12,6 @@ import Series from "./screens/Series/Series";
 class App  extends Component {
   render() {
     return (
-      <Router>
       <React.Fragment>
       <header className="container">
         <h1>UdeSA Movies</h1>
@@ -30,7 +29,6 @@ class App  extends Component {
       <Footer />
 
       </React.Fragment>
-      </Router>
     )
   }
 }
