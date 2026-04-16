@@ -1,0 +1,12 @@
+.row-cards{
+    display:flex;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+    gap: 15px;
+}
+.row-cards-TV{
+    display:flex;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+    gap: 15px;
+}

@@ -23,7 +23,7 @@ class CardSerie extends Component{
     render(){
         return(
             <article className="single-card-tv">
-            <img src={this.props.informacion.poster_path} class="card-img-top"
+            <img src={`https://image.tmdb.org/t/p/w500/${this.props.informacion.poster_path}`} className="card-img-top"
                 alt={this.props.informacion.name}/>
             <div className="cardBody">
                 <h5 className="card-title">{this.props.informacion.name}</h5>

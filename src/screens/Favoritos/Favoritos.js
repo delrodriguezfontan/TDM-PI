@@ -16,20 +16,25 @@ class Favoritos extends Component {
 
         let favoritasPelis = localStorage.getItem("favoritosPeliculas") == null ? [] : JSON.parse(localStorage.getItem("favoritosPeliculas")); 
         
-        let apiKey = "94180faf61f8ab976c73db3b0fed85bc";
+        const apiKey = "94180faf61f8ab976c73db3b0fed85bc";
+        let nuevoArrayPeliculas = [];
         
         favoritasPelis.map(id =>
         fetch(`https://api.themoviedb.org/3/movie/${id}?api_key=${apiKey}&language=es-ES`)
             .then(res => res.json())
             .then(data => {
-            this.setState({
-                peliculasFavoritas: this.state.peliculasFavoritas.concat(data),
+                nuevoArrayPeliculas.push(data)
+            
+                this.setState({
+                peliculasFavoritas: nuevoArrayPeliculas,
                 cargando: false,
+            });
+
             })
-            })
-        )
+
+             .catch(error => console.log(error))
     
-    };
+    )};
 
         render() {
 

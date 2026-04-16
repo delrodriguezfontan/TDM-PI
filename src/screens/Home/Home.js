@@ -4,7 +4,9 @@ import Peliculas from "../Peliculas/Peliculas";
 import Series from "../Series/Series";
 import { Link } from "react-router-dom";
 import CardPelicula from "../../components/CardPelicula/CardPelicula";
+import Formulario from "../../components/Formulario/Formulario";
 import CardSerie from "../../components/CardSerie/CardSerie";
+import "./Home.css";
 
 // Formulario de buscador
 class Buscador extends Component {
@@ -92,19 +94,19 @@ class Home extends Component {
     return (
       <main>
         <Buscador />
-        <h2 className="alert alert-primary">Películas populares</h2>
-        <section className="row cards" id="movies">
+        <h2 className="alert-alert-primary">Películas populares</h2>
+        <section className="row-cards" id="movies">
           {this.state.listaPeliculas.length === 0 ? (
             <h3>Cargando...</h3>
           ) : (
             this.state.listaPeliculas.map((pelicula) => (
-              <CardPelicula informacion={pelicula} />
+              <CardPelicula  informacion={pelicula} />
             ))
           )}
         </section>
 
-        <section>
-          <h2 className="alert alert-primary">Series populares</h2>
+        <section className="row-cards-TV" id="TV">
+          <h2 className="alert-alert-primary">Series populares</h2>
           {this.state.listaSeries.length === 0 ? (
             <h3>Cargando...</h3>
           ) : (
@@ -116,6 +118,6 @@ class Home extends Component {
       </main>
     );
   }
-}
+    }
 
 export default Home;

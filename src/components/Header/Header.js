@@ -18,7 +18,7 @@ function Header(){
                 <Link to ="/favoritas"  className="nav-link">Favoritas</Link>
             </li>
             <li className="nav-item ml-auto">
-                <Link to = "/registro"  className="nav-link">Registro</Link>
+                <Link to = "/register"  className="nav-link">Registro</Link>
             </li>
             <li className="nav-item">
                 <Link to ="/login"  className="nav-link">Login</Link>

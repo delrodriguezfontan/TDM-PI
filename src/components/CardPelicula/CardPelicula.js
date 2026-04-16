@@ -1,4 +1,6 @@
 import React, { Component } from "react";
+import { Link } from "react-router-dom";
+import "./CardPelicula.css";
 
 class CardPelicula extends Component {
     constructor(props){
@@ -10,34 +12,37 @@ class CardPelicula extends Component {
     }
 
     cambiarTexto(){
-        if (this.state.textoBoton == "Ver más"){
-            this.setState({
+        if (this.state.textoBoton === "Ver más"){
+            this.setState = {
                 textoBoton: "Ver menos",
                 textoClase: ""
-            })
+            }
         }
         else{
-            this.setState({
+            this.setState = {
                 textoBoton: "Ver más",
                 textoClase: "Ocultar"
 
-            })
+            }
         }
-    }
+    };
+    
+    
 
-    render(){
+    render() {
         return(
-            <article className="single-card-movie">
+            <article className="single-card-movie"> 
             <img src={`https://image.tmdb.org/t/p/w500/${this.props.informacion.poster_path}`} className="card-img-top"
                 alt={this.props.informacion.title}/>
             <div className="cardBody">
                 <h5 className="card-title">{this.props.informacion.title}</h5>
                 <p className={"card-text " + this.state.textoClase} >{this.props.informacion.overview}</p>
-               <button onClick={()=> this.cambiarTexto()}>{this.state.textoBoton}</button>
+               <button onClick={() => this.cambiarTexto()}>{this.state.textoBoton}</button>
             </div>
         </article>
         )
-    }
+    };
+
 }
 
-export default CardPelicula
+export default CardPelicula;
