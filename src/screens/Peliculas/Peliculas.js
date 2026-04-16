@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import Pelicula from "../../components/Pelicula/Pelicula";
+import CardPelicula from "../../components/CardPelicula/CardPelicula";
 
 class Peliculas extends Component {
   constructor(props) {
@@ -49,7 +49,7 @@ class Peliculas extends Component {
       contenido = (
         <section>
           {this.state.peliculas.map((pelicula) => (
-            <Pelicula key={pelicula.id} pelicula={pelicula} />
+            <CardPelicula key={pelicula.id} pelicula={pelicula} />
           ))}
         </section>
       );

@@ -7,25 +7,47 @@ class CardPelicula extends Component {
         super(props)
         this.state = {
             textoBoton: "Ver más",
-            textoClase: "Ocultar"
+            textoClase: "Ocultar",
+            esFavorito: false
         }
     }
 
     cambiarTexto(){
         if (this.state.textoBoton === "Ver más"){
-            this.setState = {
+            this.setState ({
                 textoBoton: "Ver menos",
                 textoClase: ""
-            }
+            });
         }
         else{
-            this.setState = {
+            this.setState ({
                 textoBoton: "Ver más",
                 textoClase: "Ocultar"
 
-            }
+            });
         }
-    };
+    }
+
+    
+
+    agregarFavoritos(){
+
+    let favoritos = localStorage.getItem("favoritosPeliculas") == null ? [] : JSON.parse(localStorage.getItem("favoritosPeliculas")); 
+    
+    if (this.state.esFavorito){
+      let favoritosNuevos = favoritos.filter(id => id !== this.props.informacion.id)
+      
+      localStorage.setItem("favoritosPeliculas", JSON.stringify(favoritosNuevos));
+      this.setState({esFavorito: false });
+   
+    }else{
+      favoritos.push(this.props.informacion.id);
+      localStorage.setItem("favoritosPeliculas", JSON.stringify(favoritos));
+      this.setState({esFavorito: true});
+    }
+    }
+
+    
     
     
 
@@ -38,11 +60,11 @@ class CardPelicula extends Component {
                 <h5 className="card-title">{this.props.informacion.title}</h5>
                 <p className={"card-text " + this.state.textoClase} >{this.props.informacion.overview}</p>
                <button onClick={() => this.cambiarTexto()}>{this.state.textoBoton}</button>
+               <button onClick={() => this.agregarFavoritos()}>{this.state.esFavorito ? "Quitar de favoritos" : "Agregar a favoritos"} </button>
             </div>
         </article>
         )
-    };
+    }
 
 }
-
-export default CardPelicula;
+    export default CardPelicula;

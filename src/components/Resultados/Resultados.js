@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import CardPelicula from "../../components/CardPelicula/CardPelicula";
 import CardSerie from "../../components/CardSerie/CardSerie";
+import Formulario from "../Formulario/Formulario";
 
 class Resultados extends Component {
     constructor(props) {
@@ -19,4 +20,5 @@ class Resultados extends Component {
      };
     }
 
+    
 export default Resultados;
