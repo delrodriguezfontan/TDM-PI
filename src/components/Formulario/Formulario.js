@@ -14,7 +14,7 @@ class Formulario extends Component {
     }
 
     controlarCambios(event) {
-        this.setState({ [event.target.name]: event.target.value });
+        this.setState({[event.target.name]: event.target.value });
         
     }
 
@@ -42,9 +42,7 @@ class Formulario extends Component {
                     value={this.state.busqueda} 
                     placeholder="Buscar..." />
                 
-                <Link to={`/resultados/${this.state.tipo}/${this.state.busqueda}`}>
-                     Buscar
-                </Link>
+                <Link to={`/resultados/${this.state.tipo}/${this.state.busqueda}`}> Buscar </Link>
             </form> 
         );
     }

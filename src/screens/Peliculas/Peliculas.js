@@ -37,23 +37,14 @@ class Peliculas extends Component {
           page: this.state.page + 1
         });
       })
-      .catch((error) => console.log(error));
+      
   }
 
   render() {
-    let contenido;
+    let contenido = (this.state.cargando === true) ? <p>Cargando...</p> : this.state.peliculas.map((informacion) => (
+      <CardPelicula key={informacion.id} informacion={informacion} tipo="movie" />
 
-    if (this.state.loading) {
-      contenido = <p>Cargando...</p>;
-    } else {
-      contenido = (
-        <section>
-          {this.state.peliculas.map((pelicula) => (
-            <CardPelicula key={pelicula.id} pelicula={pelicula} />
-          ))}
-        </section>
-      );
-    }
+    ));
 
     return (
       <React.Fragment>
@@ -61,9 +52,7 @@ class Peliculas extends Component {
 
         {contenido}
 
-        <button onClick={() => this.cargarMas()}>
-          Cargar más
-        </button>
+        <button onClick={() => this.cargarMas()}>Cargar más</button>
       </React.Fragment>
     );
   }

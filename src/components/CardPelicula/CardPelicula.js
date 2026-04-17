@@ -40,7 +40,9 @@ class CardPelicula extends Component {
       this.setState({esFavorito: false });
    
     }else{
-      favoritos.push(this.props.informacion.id);
+      favoritos.push({
+        id: this.props.informacion.id,
+        tipo: this.props.tipo});
       localStorage.setItem("favoritosPeliculas", JSON.stringify(favoritos));
       this.setState({esFavorito: true});
     }
@@ -52,7 +54,10 @@ class CardPelicula extends Component {
     
 
     render() {
+        
         return(
+            
+
             <article className="single-card-movie"> 
             <img src={`https://image.tmdb.org/t/p/w500/${this.props.informacion.poster_path}`} className="card-img-top"
                 alt={this.props.informacion.title}/>
