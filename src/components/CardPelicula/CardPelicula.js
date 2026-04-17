@@ -1,5 +1,4 @@
 import React, { Component } from "react";
-import { Link } from "react-router-dom";
 import "./CardPelicula.css";
 
 class CardPelicula extends Component {
@@ -45,6 +44,7 @@ class CardPelicula extends Component {
       localStorage.setItem("favoritosPeliculas", JSON.stringify(favoritos));
       this.setState({esFavorito: true});
     }
+    console.log(localStorage.getItem("favoritosPeliculas"))
     }
 
     

@@ -19,6 +19,7 @@ class Favoritos extends Component {
         let favoritasPelis = localStorage.getItem("favoritosPeliculas") == null ? [] : JSON.parse(localStorage.getItem("favoritosPeliculas")); 
         
         const apiKey = "94180faf61f8ab976c73db3b0fed85bc";
+
         let nuevoArrayPeliculas = [];
 
             favoritasPelis.map(id =>
