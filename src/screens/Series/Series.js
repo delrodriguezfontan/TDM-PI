@@ -25,10 +25,10 @@ class Series extends Component{
                 series: data.results,
                 page: 2,
                 cargando: false
-            })
-                .catch((error) => {console.log(error);          
-                }));
-        }
+            }))
+                     
+        }         
+        
     
         cargarMas() {
 
@@ -42,17 +42,27 @@ class Series extends Component{
                         page: this.state.page + 1,
                     });
                 
-                });
+                })
+                
          }
     
    
 
     render() {
+        let listado = (this.state.cargando === true) ? <p>Cargando...</p> : this.state.series.map((informacion) => (
+            <CardSerie key={informacion.id} informacion={informacion} tipo="tv" /> 
+        ));
+
+
+
         return(
-            <div>
+            <React.Fragment>
             <h2 className="alert alert-warning">Todas las series</h2>
+
+            {listado}
+
              <button className="btn btn-warning" onClick={() => this.cargarMas()}>Cargar más</button>
-               </div>
+            </React.Fragment>
             );
         }
     }

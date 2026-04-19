@@ -3,10 +3,15 @@ import {Link} from "react-router-dom";
 import "./Login.css";
 import Cookies from "universal-cookie";
 
+const cookies = new Cookies()
+
 class Formulario extends Component{
   constructor(props){
     super(props);
-    this.state = {valor: ""}
+    this.state = {usario: "",
+                  email: "",
+                  password: ""
+    }
   }
   evitarSubmit(event){
     event.preventDefault();
@@ -16,6 +21,19 @@ controlarCambios(event){
     this.setState({
     })
 
+}
+onSubmit(email,password){
+  let usuarioACrear = {
+    user: usario,
+    email: email, 
+    password: password
+  };
+  if (this.email === email){
+    
+  }
+
+}ir (user){
+  cookies.set("user-auth-cookie", user.email)
 }
 render(){
   return (

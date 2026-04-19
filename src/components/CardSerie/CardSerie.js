@@ -5,7 +5,8 @@ class CardSerie extends Component{
     constructor(props){
         super(props)
         this.state = {
-            textoBoton: "Ver más"
+            textoBoton: "Ver más",
+            esFavorito: false
         }
     }
     cambiarTexto(){
@@ -20,6 +21,28 @@ class CardSerie extends Component{
             })
         }
     }
+
+    agregarFavoritos(){
+
+    let favoritos = localStorage.getItem("favoritosSeries") == null ? [] : JSON.parse(localStorage.getItem("favoritosSeries")); 
+    
+    if (this.state.esFavorito){
+      let favoritosNuevos = favoritos.filter(id => id !== this.props.informacion.id)
+      
+      localStorage.setItem("favoritosSeries", JSON.stringify(favoritosNuevos));
+      this.setState({esFavorito: false });
+   
+    }else{
+      favoritos.push(this.props.informacion.id);
+      localStorage.setItem("favoritosSeries", JSON.stringify(favoritos));
+      this.setState({esFavorito: true});
+    }
+    }
+
+
+
+
+
     render(){
         return(
             <article className="single-card-tv">
@@ -29,6 +52,7 @@ class CardSerie extends Component{
                 <h5 className="card-title">{this.props.informacion.name}</h5>
                 <p className="card-text">{this.props.informacion.overview}.</p>
                 <button onClick={()=> this.cambiarTexto()}>{this.state.textoBoton}</button>
+                <button onClick={() => this.agregarFavoritos()}> {this.state.esFavorito ? "Quitar de favoritos" : "Agregar a favoritos"} </button>
                 
             </div>
         </article>

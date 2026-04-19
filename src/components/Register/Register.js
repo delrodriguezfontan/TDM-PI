@@ -2,7 +2,6 @@ import React, { Component } from "react";
 import {Link} from "react-router-dom";
 import "./Register.css";
 import Cookies from "universal-cookie";
-
 class Register extends Component{
     constructor(props){
         super(props)
@@ -44,8 +43,9 @@ Validar(){
         return;
     }
     localStorage.setItem("usuarios", JSON.stringify(usuario));
-    let recuperoStorage = JSON.parse(localStorage.getItem("usuarios"));
-    if (recuperoStorage.mail === mail ){
+    let usuariosGuardados = localStorage.getItem("usuarios");
+    let usuarios = usuariosGuardados ? JSON.parse(usuariosGuardados): []
+    if (usuarios.email === mail ){
     
         setCookie("usuario", JSON.stringify({email: mail}));
     }

@@ -1,7 +1,6 @@
 
 import Header from "./components/Header/Header";
 import React, {Component} from "react";
-
 import Footer from "./components/Footer/Footer";
 import Peliculas from "./screens/Peliculas/Peliculas";
 import Resultados from "./components/Resultados/Resultados";
@@ -16,10 +15,10 @@ class App  extends Component {
     return (
 
       <React.Fragment>
-      <header className="container">
-        <h1>UdeSA Movies</h1>
-        <Header />
-      </header>
+        <header className="container">
+        <h1 className="titulo">Las 2 mosqueteras</h1>
+          <Header />
+        </header>
 
 
       <Switch> 
