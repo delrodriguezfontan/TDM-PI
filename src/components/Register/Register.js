@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import {Link} from "react-router-dom";
-
+import "./Register.css";
+import Cookies from "universal-cookie";
 
 class Register extends Component{
     constructor(props){
@@ -42,7 +43,13 @@ Validar(){
         this.setState({error: "la contraseña debe tener al menos 6 caracteres."});
         return;
     }
-   localStorage.setItem("usuarios", JSON.stringify(usuario));
+    localStorage.setItem("usuarios", JSON.stringify(usuario));
+    let recuperoStorage = JSON.parse(localStorage.getItem("usuarios"));
+    if (recuperoStorage.mail === mail ){
+    
+        setCookie("usuario", JSON.stringify({email: mail}));
+    }
+
 }
 render (){
     return(

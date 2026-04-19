@@ -1,46 +1,62 @@
-function Login() {
-  return (
-    <div className="container">
-      <h1>UdeSA Movies</h1>
+import React, { Component } from "react";
+import {Link} from "react-router-dom";
+import "./Login.css";
+import Cookies from "universal-cookie";
 
-      <h2 className="alert alert-primary">Iniciar sesión</h2>
-
-      <div className="row justify-content-center">
-        <div className="col-md-6">
-          <form>
-            <div className="form-group">
-              <label htmlFor="email">Email</label>
-              <input
-                type="email"
-                className="form-control"
-                id="email"
-                placeholder="Ingresá tu email"
-              />
-            </div>
-
-            <div className="form-group">
-              <label htmlFor="password">Contraseña</label>
-              <input
-                type="password"
-                className="form-control"
-                id="password"
-                placeholder="Ingresá tu contraseña"
-              />
-            </div>
-
-            <button type="submit" className="btn btn-primary btn-block">
-              Iniciar sesión
-            </button>
-          </form>
-
-          <p className="mt-3 text-center">
-            ¿No tenés cuenta? <a href="register.html">Registrarse</a>
-          </p>
-        </div>
-      </div>
-    </div>
-    
-  );
+class Formulario extends Component{
+  constructor(props){
+    super(props);
+    this.state = {valor: ""}
+  }
+  evitarSubmit(event){
+    event.preventDefault();
 }
+
+controlarCambios(event){
+    this.setState({
+    })
+
+}
+render(){
+  return (
+     <form onSubmit = {(event) => this.evitarSubmit(event)}>
+             
+                        <div className="form-group">
+                            <label>Email
+                            <input 
+                            type="email" 
+                            className="form-control" 
+                            id="email" 
+                            placeholder="Ingresá tu email" 
+                            onChange={(event) => this.controlarCambios(event)} 
+                            value={this.state.email} />
+                            </label>
+                        </div>
+    
+                        <div className="form-group">
+                            <label>Contraseña
+                            <input 
+                            type="password" 
+                            className="form-control" 
+                            id="password" 
+                            placeholder="Ingresá tu contraseña" 
+                            onChange={(event) => this.controlarCambios2(event)} 
+                            value={this.state.password} />
+                            </label>
+                        </div>
+                        <button 
+                        type="submit" 
+                        className="btn btn-primary btn-block">
+                            Iniciar sesion
+                        </button>
+                   
+                    <p className="mt-3 text-center">¿Ya tenés cuenta? <Link to={`/register`}>
+                      "Registrarse"</Link>
+                    </p>
+            </form>
+        );
+        }
+    }
+  
 
 export default Login;
