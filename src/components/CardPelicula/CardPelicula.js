@@ -32,10 +32,7 @@ class CardPelicula extends Component {
     agregarFavoritos(){
         let favoritos = localStorage.getItem("favoritosPeliculas") === null ? [] : JSON.parse(localStorage.getItem("favoritosPeliculas"));
 
-        favoritos.push({
-        id: this.props.informacion.id,
-        tipo: this.props.tipo
-    });
+        favoritos.push(this.props.informacion.id);
 
     localStorage.setItem("favoritosPeliculas", JSON.stringify(favoritos));
 
@@ -45,7 +42,7 @@ class CardPelicula extends Component {
     borrarFavoritos() {
         let favoritos = JSON.parse(localStorage.getItem("favoritosPeliculas"));
 
-        let favoritosNuevos = favoritos.filter(favs => favs.id !== this.props.informacion.id);
+        let favoritosNuevos = favoritos.filter(id => id !== this.props.informacion.id);
 
     localStorage.setItem("favoritosPeliculas", JSON.stringify(favoritosNuevos));
 

@@ -25,10 +25,7 @@ class CardSerie extends Component{
      agregarFavoritos(){
         let favoritos = localStorage.getItem("favoritosSeries") === null ? [] : JSON.parse(localStorage.getItem("favoritosSeries"));
 
-        favoritos.push({
-        id: this.props.informacion.id,
-        tipo: this.props.tipo
-    });
+        favoritos.push(this.props.informacion.id);
 
     localStorage.setItem("favoritosSeries", JSON.stringify(favoritos));
 
