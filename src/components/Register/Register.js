@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import {Link} from "react-router-dom";
 import "./Register.css";
 import Cookies from "universal-cookie";
+
 class Register extends Component{
     constructor(props){
         super(props)

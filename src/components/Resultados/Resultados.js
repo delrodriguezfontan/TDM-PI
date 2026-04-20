@@ -13,7 +13,7 @@ class Resultados extends Component {
     };
     componentDidMount() {
     const apiKey = "94180faf61f8ab976c73db3b0fed85bc";
-    fetch(`https://api.themoviedb.org/3/search/${this.props.match.params.tipo}?api_key=${apiKey}&query=${encodeURIComponent(this.props.match.params.busqueda)}&language=es-ES`)
+    fetch(`https://api.themoviedb.org/3/search/${this.props.match.params.tipo}?api_key=${apiKey}&query=${(this.props.match.params.busqueda)}&language=es-ES`)
         .then(response => response.json())
         .then(data => {
 

@@ -24,17 +24,17 @@ class CardSerie extends Component{
 
     agregarFavoritos(){
 
-    let favoritos = localStorage.getItem("favoritosSeries") == null ? [] : JSON.parse(localStorage.getItem("favoritosSeries")); 
+    let favoritos = localStorage.getItem("favoritos") == null ? [] : JSON.parse(localStorage.getItem("favoritos")); 
     
     if (this.state.esFavorito){
       let favoritosNuevos = favoritos.filter(id => id !== this.props.informacion.id)
       
-      localStorage.setItem("favoritosSeries", JSON.stringify(favoritosNuevos));
+      localStorage.setItem("favoritos", JSON.stringify(favoritosNuevos));
       this.setState({esFavorito: false });
    
     }else{
       favoritos.push(this.props.informacion.id);
-      localStorage.setItem("favoritosSeries", JSON.stringify(favoritos));
+      localStorage.setItem("favoritos", JSON.stringify(favoritos));
       this.setState({esFavorito: true});
     }
     }
@@ -44,6 +44,8 @@ class CardSerie extends Component{
 
 
     render(){
+
+        
         return(
             <article className="single-card-tv">
             <img src={`https://image.tmdb.org/t/p/w500/${this.props.informacion.poster_path}`} className="card-img-top"

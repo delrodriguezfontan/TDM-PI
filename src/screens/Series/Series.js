@@ -26,6 +26,8 @@ class Series extends Component{
                 page: 2,
                 cargando: false
             }))
+
+             .catch(error => console.log(error))
                      
         }         
         
@@ -42,8 +44,10 @@ class Series extends Component{
                         page: this.state.page + 1,
                     });
                 
-                })
+                }
                 
+            )
+            .catch(error => console.log(error))
          }
     
    

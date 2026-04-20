@@ -31,22 +31,24 @@ class CardPelicula extends Component {
 
     agregarFavoritos(){
 
-    let favoritos = localStorage.getItem("favoritosPeliculas") == null ? [] : JSON.parse(localStorage.getItem("favoritosPeliculas")); 
+    let favoritos = localStorage.getItem("favoritos") == null ? [] : JSON.parse(localStorage.getItem("favoritos")); 
     
     if (this.state.esFavorito){
       let favoritosNuevos = favoritos.filter(id => id !== this.props.informacion.id)
       
-      localStorage.setItem("favoritosPeliculas", JSON.stringify(favoritosNuevos));
+      localStorage.setItem("favoritos", JSON.stringify(favoritosNuevos));
       this.setState({esFavorito: false });
    
     }else{
       favoritos.push({
         id: this.props.informacion.id,
-        tipo: this.props.tipo});
-      localStorage.setItem("favoritosPeliculas", JSON.stringify(favoritos));
+        tipo: this.props.tipo
+    
+    });
+      localStorage.setItem("favoritos", JSON.stringify(favoritos));
+      
       this.setState({esFavorito: true});
     }
-    console.log(localStorage.getItem("favoritosPeliculas"))
     }
 
     

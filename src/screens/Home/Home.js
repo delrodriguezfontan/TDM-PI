@@ -100,7 +100,7 @@ class Home extends Component {
             <h3>Cargando...</h3>
           ) : (
             this.state.listaPeliculas.map((pelicula) => (
-              <CardPelicula  key={pelicula.id}informacion={pelicula} />
+              <CardPelicula  key={pelicula.id} informacion={pelicula} />
             ))
           )}
         </section>
