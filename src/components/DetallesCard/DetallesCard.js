@@ -47,27 +47,7 @@ componentDidMount() {
 
   }
 
-  agregarFavoritos(){
-
-    let favoritos = localStorage.getItem("favoritos") == null ? [] : JSON.parse(localStorage.getItem("favoritos")); 
-    
-    if (this.state.esFavorito){
-      let favoritosNuevos = favoritos.filter(id => id !== this.props.informacion.id)
-      
-      localStorage.setItem("favoritos", JSON.stringify(favoritosNuevos));
-      this.setState({esFavorito: false });
-   
-    }else{
-      favoritos.push({
-        id: this.props.informacion.id,
-        tipo: this.props.tipo
-    
-    });
-      localStorage.setItem("favoritos", JSON.stringify(favoritos));
-      
-      this.setState({esFavorito: true});
-    }
-    }
+  
 
     
   render() {
@@ -81,13 +61,14 @@ componentDidMount() {
             <p className="mt-0 mb-0" id="release-date"><strong>{this.props.dataPelis.release_date}</strong> 2025-07-09</p>
             <p className="mt-0" id="votes"><strong>{this.props.dataPelis.popularity}</strong> </p>
 
-            {cookies.get("user-auth-cookie") ? (
-            <button onClick={() => this.agregarFavoritos()}>{this.state.esFavorito ? "Quitar de favoritos" : "Agregar a favoritos"}
-            </button> ) : null}
+           <button onClick={() => this.state.esFavorito ? this.borrarFavoritos() : this.agregarFavoritos()}> 
+                {this.state.esFavorito ? "Quitar de favoritos" : "Agregar a favoritos"}</button>
+  
         </section>
     </section>
-    )  
-}
-}
+            
+    )}
+  }
 
+  
 export default DetallesCard;
