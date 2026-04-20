@@ -5,36 +5,50 @@ import Cookies from "universal-cookie";
 
 const cookies = new Cookies()
 
-class Formulario extends Component{
+class Login extends Component{
   constructor(props){
     super(props);
     this.state = {usario: "",
                   email: "",
-                  password: ""
+                  password: "",
+                  error: ""
     }
-  }
+  };
   evitarSubmit(event){
     event.preventDefault();
-}
+    this.validar
+};
 
-controlarCambios(event){
+cambioEmail(event){
     this.setState({
+      email: event.target.value
+    });
+
+};
+cambioPasswordl(event){
+  this.setState({
+    password: event.target.value
+  });
+
+};
+validarLogin(){
+  let {email,password} = this.state;
+
+  let traerUsuariosGuardados = localStorage.getItem("usuarios");
+  let usuarios = traerUsuarios ? JSON.parse(traerUsuariosGuardados): [];
+  
+  //PREGUNTAS LUCA
+  //Como hago para hacer verificar que el email no esta repetido, hasta ahora solo traigo los datos en un array. 
+  //Tengo que pasar el array a un usario simple como lo hago?
+
+  if (usuarios.email == email || usuarios.password !== password){
+    this.setState({
+      error: "Credenciales incorrectas"
     })
-
-}
-onSubmit(email,password){
-  let usuarioACrear = {
-    user: usario,
-    email: email, 
-    password: password
-  };
-  if (this.email === email){
-    
   }
-
-}ir (user){
-  cookies.set("user-auth-cookie", user.email)
+cookies.set("usuario", JSON.stringify({email}, {password}));
 }
+
 render(){
   return (
      <form onSubmit = {(event) => this.evitarSubmit(event)}>
@@ -46,7 +60,7 @@ render(){
                             className="form-control" 
                             id="email" 
                             placeholder="Ingresá tu email" 
-                            onChange={(event) => this.controlarCambios(event)} 
+                            onChange={(event) => this.cambioEmail(event)} 
                             value={this.state.email} />
                             </label>
                         </div>
@@ -58,7 +72,7 @@ render(){
                             className="form-control" 
                             id="password" 
                             placeholder="Ingresá tu contraseña" 
-                            onChange={(event) => this.controlarCambios2(event)} 
+                            onChange={(event) => this.cambioPasswordl(event)} 
                             value={this.state.password} />
                             </label>
                         </div>
@@ -68,7 +82,7 @@ render(){
                             Iniciar sesion
                         </button>
                    
-                    <p className="mt-3 text-center">¿Ya tenés cuenta? <Link to={`/register`}>
+                    <p className="mt-3 text-center">¿No tienes cuenta? <Link to={`/register`}>
                       "Registrarse"</Link>
                     </p>
             </form>
