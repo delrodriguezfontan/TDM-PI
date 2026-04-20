@@ -22,22 +22,28 @@ class CardSerie extends Component{
         }
     }
 
-    agregarFavoritos(){
+     agregarFavoritos(){
+        let favoritos = localStorage.getItem("favoritosSeries") === null ? [] : JSON.parse(localStorage.getItem("favoritosSeries"));
 
-    let favoritos = localStorage.getItem("favoritos") == null ? [] : JSON.parse(localStorage.getItem("favoritos")); 
-    
-    if (this.state.esFavorito){
-      let favoritosNuevos = favoritos.filter(id => id !== this.props.informacion.id)
-      
-      localStorage.setItem("favoritos", JSON.stringify(favoritosNuevos));
-      this.setState({esFavorito: false });
-   
-    }else{
-      favoritos.push(this.props.informacion.id);
-      localStorage.setItem("favoritos", JSON.stringify(favoritos));
-      this.setState({esFavorito: true});
-    }
-    }
+        favoritos.push({
+        id: this.props.informacion.id,
+        tipo: this.props.tipo
+    });
+
+    localStorage.setItem("favoritosSeries", JSON.stringify(favoritos));
+
+    this.setState({esFavorito: true });
+}
+
+    borrarFavoritos() {
+        let favoritos = JSON.parse(localStorage.getItem("favoritosSeries"));
+
+        let favoritosNuevos = favoritos.filter(favs => favs.id !== this.props.informacion.id);
+
+    localStorage.setItem("favoritosSeries", JSON.stringify(favoritosNuevos));
+
+    this.setState({esFavorito: false });
+}
 
 
 
@@ -54,7 +60,8 @@ class CardSerie extends Component{
                 <h5 className="card-title">{this.props.informacion.name}</h5>
                 <p className="card-text">{this.props.informacion.overview}.</p>
                 <button onClick={()=> this.cambiarTexto()}>{this.state.textoBoton}</button>
-                <button onClick={() => this.agregarFavoritos()}> {this.state.esFavorito ? "Quitar de favoritos" : "Agregar a favoritos"} </button>
+                <button onClick={() => this.state.esFavorito ? this.borrarFavoritos() : this.agregarFavoritos()}> 
+                {this.state.esFavorito ? "Quitar de favoritos" : "Agregar a favoritos"}</button>
                 
             </div>
         </article>

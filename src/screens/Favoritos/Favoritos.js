@@ -33,7 +33,7 @@ class Favoritos extends Component {
                 
                     this.setState({
                     peliculasFavoritas: nuevoArrayPeliculas,
-                    cargando: false
+                   
                     
                 });
 
@@ -57,7 +57,7 @@ class Favoritos extends Component {
 
                         this.setState({
                         seriesFavoritas: nuevoArraySeries,
-                        cargando: false
+                      
                             
                         });
                     })
