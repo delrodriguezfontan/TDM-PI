@@ -8,7 +8,7 @@ const cookies = new Cookies()
 class Login extends Component{
   constructor(props){
     super(props);
-    this.state = {usario: "",
+    this.state = {usario: "", //borrAR
                   email: "",
                   password: "",
                   error: ""
@@ -92,3 +92,5 @@ render(){
   
 
 export default Login;
+
+//FALTA TRAER LOS USUARIOS REGISRTRADOS DESDE REGISTRO.

@@ -31,7 +31,7 @@ controlarCambios2(event){
     })
 
 }
-Validar(){
+validar(){
     let mail = this.state.email
     let contrasena = this.state.password
     let usuario = {
