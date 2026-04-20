@@ -7,19 +7,22 @@ class CardSerie extends Component{
         super(props)
         this.state = {
             textoBoton: "Ver más",
+            textoClase: "Ocultar",
             esFavorito: false
         }
     }
     cambiarTexto(){
-        if (this.state.textoBoton == "Ver más"){
+        if (this.state.textoBoton === "Ver más"){
             this.setState({
-                textoBoton: "Ver menos"
+                textoBoton: "Ver menos",
+                textoClase: ""
             })
         }
         else{
             this.setState({
-                textoBoton: "Ver más"
-            })
+                textoBoton: "Ver más",
+                textoClase: "Ocultar"
+            });
         }
     }
 
@@ -56,7 +59,7 @@ class CardSerie extends Component{
                 alt={this.props.informacion.name}/>
             <div className="cardBody">
                 <h5 className="card-title">{this.props.informacion.name}</h5>
-                <p className="card-text">{this.props.informacion.overview}.</p>
+                <p className={"card-text " + this.state.textoClase}> {this.props.informacion.overview}.</p>
                 <button onClick={()=> this.cambiarTexto()}>{this.state.textoBoton}</button>
                 <button onClick={() => this.state.esFavorito ? this.borrarFavoritos() : this.agregarFavoritos()}> 
                 {this.state.esFavorito ? "Quitar de favoritos" : "Agregar a favoritos"}</button>

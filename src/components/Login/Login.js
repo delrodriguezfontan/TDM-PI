@@ -1,21 +1,56 @@
 import React, { Component } from "react";
 import {Link} from "react-router-dom";
 import "./Login.css";
+import Cookies from "universal-cookie";
 
 const cookies = new Cookies()
 
 class Login extends Component{
   constructor(props){
     super(props);
-    this.state = {usario: "",
+    this.state = {
                   email: "",
                   password: "",
                   error: ""
     }
   };
+
+
   evitarSubmit(event){
     event.preventDefault();
-    this.validar
+
+    if (this.state.email === "") {
+      this.setState({error: "completar email"})
+      return
+    }
+    if (this.state.password === "") {
+      this.setState({error: "completar password"})
+      return
+    }
+    
+    let traerUsuariosGuardados = localStorage.getItem("usuarios");
+
+    if(traerUsuariosGuardados == null){
+      this.setState({ error: "Credenciales incorrectas"});
+      return ;
+  
+    }else {
+      let usuarios = JSON.parse(traerUsuariosGuardados);
+      let usuarioFiltrado = usuarios.filter(usu => usu.email === this.state.email);
+      let usuario = usuarioFiltrado[0];
+      console.log(usuario);
+      
+  
+          if (usuario.password !== this.state.password){
+            this.setState({
+              error: "Credenciales incorrectas"
+            });
+            return;
+          }
+    }
+    
+  cookies.set("usuario", JSON.stringify({email: this.state.email}));
+  this.props.history.push("/")
 };
 
 cambioEmail(event){
@@ -30,23 +65,8 @@ cambioPasswordl(event){
   });
 
 };
-validarLogin(){
-  let {email,password} = this.state;
 
-  let traerUsuariosGuardados = localStorage.getItem("usuarios");
-  let usuarios = traerUsuarios ? JSON.parse(traerUsuariosGuardados): [];
-  
-  //PREGUNTAS LUCA
-  //Como hago para hacer verificar que el email no esta repetido, hasta ahora solo traigo los datos en un array. 
-  //Tengo que pasar el array a un usario simple como lo hago?
 
-  if (usuarios.email == email || usuarios.password !== password){
-    this.setState({
-      error: "Credenciales incorrectas"
-    })
-  }
-cookies.set("usuario", JSON.stringify({email}, {password}));
-}
 
 render(){
   return (
@@ -80,6 +100,8 @@ render(){
                         className="btn btn-primary btn-block">
                             Iniciar sesion
                         </button>
+
+                        <p>{this.state.error}</p>
                    
                     <p className="mt-3 text-center">¿No tienes cuenta? <Link to={`/register`}>
                       "Registrarse"</Link>

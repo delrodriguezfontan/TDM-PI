@@ -2,7 +2,9 @@ import React, { Component } from "react";
 import {Link} from "react-router-dom";
 import "./Register.css";
 import Cookies from "universal-cookie";
+import { withRouter } from "react-router-dom/cjs/react-router-dom.min";
 
+const cookies = new Cookies();
 class Register extends Component{
     constructor(props){
         super(props)
@@ -15,6 +17,46 @@ class Register extends Component{
    
 evitarSubmit(event){
     event.preventDefault();
+
+    let mail = this.state.email;
+    let contrasena = this.state.password;
+    let usuario = {
+                  email: this.state.email,
+                    password: this.state.password      
+    };
+
+    if (mail === "") {
+        this.setState({error: "Completar campo email"})
+        return
+    }
+    if (contrasena.length < 6){
+        this.setState({error: "la contraseña debe tener al menos 6 caracteres."});
+        return;
+    };
+
+
+    let usuariosGuardados = localStorage.getItem("usuarios");
+    console.log(usuariosGuardados);
+    
+    if (usuariosGuardados !== null) {
+        let usersParseados = JSON.parse(usuariosGuardados)
+        let existe = usersParseados.filter(usu => usu.email === this.states.email)
+        if (existe.length > 0) {
+            this.setState({error: "El usuario ya existe"})
+            return
+        }else {
+            existe.push(usuario)
+            localStorage.setItem("usuarios", JSON.stringify(existe))
+        }
+    }else{
+        let usuarioInicial = []
+        usuarioInicial.push(usuario)
+        localStorage.setItem("usuarios", JSON.stringify(usuarioInicial))
+    }
+
+    this.props.history.push("/login")
+   
+  
 }
 
 controlarCambios(event){
@@ -31,29 +73,6 @@ controlarCambios2(event){
     })
 
 }
-
-Validar(){
-    let mail = this.state.email
-    let contrasena = this.state.password
-    let usuario = {
-                 email: this.state.email,
-                    password: this.state.password      
-    }
-
-    if (contrasena.length < 6){
-        this.setState({error: "la contraseña debe tener al menos 6 caracteres."});
-        return;
-    }
-    localStorage.setItem("usuarios", JSON.stringify(usuario));
-    let usuariosGuardados = localStorage.getItem("usuarios");
-    let usuarios = usuariosGuardados ? JSON.parse(usuariosGuardados): []
-    if (usuarios.email === mail ){
-    
-        setCookie("usuario", JSON.stringify({email: mail}));
-    }
-
-}
-
 render (){
     return(
         <form onSubmit = {(event) => this.evitarSubmit(event)}>
@@ -81,12 +100,12 @@ render (){
                         value={this.state.password} />
                         </label>
                     </div>
-                    <button 
+                    <button onClick={()=> this.state}
                     type="submit" 
                     className="btn btn-primary btn-block">
                         Registrarse
                     </button>
-               
+                    <p>{this.state.error}</p>
                 <p className="mt-3 text-center">¿Ya tenés cuenta? <Link to={`/Login`}>
                   "Iniciar sesión"</Link>
                 </p>
@@ -95,4 +114,4 @@ render (){
     }
 }
 
-export default Register
+export default withRouter( Register)
