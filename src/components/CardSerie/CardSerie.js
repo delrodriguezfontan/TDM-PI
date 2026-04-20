@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import "./CardSerie.css";
 
+
 class CardSerie extends Component{
     constructor(props){
         super(props)

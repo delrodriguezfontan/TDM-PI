@@ -31,6 +31,7 @@ controlarCambios2(event){
     })
 
 }
+
 Validar(){
     let mail = this.state.email
     let contrasena = this.state.password
@@ -52,6 +53,7 @@ Validar(){
     }
 
 }
+
 render (){
     return(
         <form onSubmit = {(event) => this.evitarSubmit(event)}>

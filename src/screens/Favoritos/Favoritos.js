@@ -45,11 +45,11 @@ class Favoritos extends Component {
     
     )
 
-        let favoritasSeries = localStorage.getItem("favoritosSeries") == null ? [] : JSON.parse(localStorage.getItem("favoritosSeries"));
+        let favoritasTv = localStorage.getItem("favoritosSeries") == null ? [] : JSON.parse(localStorage.getItem("favoritosSeries"));
 
         let nuevoArraySeries = [];
 
-            favoritasSeries.map(id => 
+            favoritasTv.map(id => 
                 fetch(`https://api.themoviedb.org/3/tv/${id}?api_key=${apiKey}&language=es-ES`)
                     .then(res => res.json())
                     .then(data => {
