@@ -1,0 +1,7 @@
+@media(max-width: 420px){
+   .alert-primary-mt-4-text-center{
+    footer{
+        width: 100%;
+    }
+   }
+}

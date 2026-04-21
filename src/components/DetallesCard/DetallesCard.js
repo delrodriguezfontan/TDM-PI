@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import Cookies from "universal-cookie";
-
+import "./DetallesCard.css";
 
 const cookies = new Cookies();
 
@@ -64,7 +64,7 @@ class DetallesCard extends Component {
             <div>
                 <img
                   src={`https://image.tmdb.org/t/p/w500/${this.state.data.poster_path}`}
-                  className="col-md-6 info"
+                  className="col-md-6-info"
                   alt={this.state.data.name}
                 />
                 {
