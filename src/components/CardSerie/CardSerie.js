@@ -11,6 +11,19 @@ class CardSerie extends Component{
             esFavorito: false
         }
     }
+
+    componentDidMount(){
+        let storage = localStorage.getItem("favoritosSeries")
+        if (storage !== null) {
+            let parseado = JSON.parse(storage)
+            if (parseado.includes(this.props.informacion.id)) {
+                this.setState({
+                    esFavorito: true
+                })
+            }
+        }
+    }
+
     cambiarTexto(){
         if (this.state.textoBoton === "Ver más"){
             this.setState({
@@ -24,7 +37,11 @@ class CardSerie extends Component{
                 textoClase: "Ocultar"
             });
         }
+
+
     }
+
+
 
      agregarFavoritos(){
         let favoritos = localStorage.getItem("favoritosSeries") === null ? [] : JSON.parse(localStorage.getItem("favoritosSeries"));
@@ -39,11 +56,11 @@ class CardSerie extends Component{
     borrarFavoritos() {
         let favoritos = JSON.parse(localStorage.getItem("favoritosSeries"));
 
-        let favoritosNuevos = favoritos.filter(favs => favs.id !== this.props.informacion.id);
+        let favoritosNuevos = favoritos.filter(id => id !== this.props.informacion.id);
+   
+        localStorage.setItem("favoritosSeries", JSON.stringify(favoritosNuevos));
 
-    localStorage.setItem("favoritosSeries", JSON.stringify(favoritosNuevos));
-
-    this.setState({esFavorito: false });
+        this.setState({esFavorito: false });
 }
 
 
@@ -61,6 +78,7 @@ class CardSerie extends Component{
                 <h5 className="card-title">{this.props.informacion.name}</h5>
                 <p className={"card-text " + this.state.textoClase}> {this.props.informacion.overview}.</p>
                 <button onClick={()=> this.cambiarTexto()}>{this.state.textoBoton}</button>
+
                 <button onClick={() => this.state.esFavorito ? this.borrarFavoritos() : this.agregarFavoritos()}> 
                 {this.state.esFavorito ? "Quitar de favoritos" : "Agregar a favoritos"}</button>
                 

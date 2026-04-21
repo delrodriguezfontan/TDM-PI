@@ -19,7 +19,7 @@ function Header(){
                 <Link to = "/series"  className="nav-link">Series</Link>
             </li>
             
-            {cookies.get("user-auth-cookie") ?
+           {!cookies.get("user-auth-cookie") ?
             <li className="nav-item">
                 <Link to="/favoritos" className="nav-link">Favoritos</Link>
             </li>

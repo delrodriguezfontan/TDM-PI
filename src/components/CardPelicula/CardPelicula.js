@@ -27,6 +27,18 @@ class CardPelicula extends Component {
         }
     }
 
+    componentDidMount(){
+        let storage = localStorage.getItem("favoritosPeliculas")
+        if (storage !== null) {
+            let parseado = JSON.parse(storage)
+            if (parseado.includes(this.props.informacion.id)) {
+                this.setState({
+                    esFavorito: true
+                })
+            }
+        }
+    }
+
     
 
     agregarFavoritos(){
