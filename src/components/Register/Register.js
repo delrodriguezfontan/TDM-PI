@@ -73,7 +73,6 @@ controlarCambios2(event){
     })
 
 }
-
 render (){
     return(
         <form onSubmit = {(event) => this.evitarSubmit(event)}>

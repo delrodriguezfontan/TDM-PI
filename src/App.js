@@ -11,6 +11,8 @@ import Register from "./components/Register/Register";
 import Login from "./components/Login/Login";
 import NotFound from "./components/NotFound/NotFound";
 import DetallesCard from "./components/DetallesCard/DetallesCard";
+import Favoritos from "./screens/Favoritos/Favoritos"
+
 
 
 class App  extends Component {
@@ -29,6 +31,7 @@ class App  extends Component {
         <Route path="/resultados/:tipo/:busqueda" component={Resultados} />
         <Route path="/peliculas" component={Peliculas} />
         <Route path="/series" component={Series} />
+        <Route path="/favoritos" component={Favoritos} /> 
         <Route path="/register" component={Register} />
         <Route path="/login" component={Login} />
         <Route path="/detalleCard/:id/:tipo" component={DetallesCard}/>

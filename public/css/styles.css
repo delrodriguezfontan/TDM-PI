@@ -99,6 +99,10 @@ nav {
 
 }
 
+.notfound {
+    font-size: 35px;
+}
+
 @media(min-width: 765px){
     nav {
         grid-template-columns: 1fr;
