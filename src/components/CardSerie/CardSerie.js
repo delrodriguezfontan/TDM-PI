@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import "./CardSerie.css";
+import {Link} from "react-router-dom";
 
 class CardSerie extends Component{
     constructor(props){
@@ -54,8 +55,10 @@ class CardSerie extends Component{
         
         return(
             <article className="single-card-tv">
+            <Link to={`/detalleCard/${this.props.informacion.id}/tv`} >
             <img src={`https://image.tmdb.org/t/p/w500/${this.props.informacion.poster_path}`} className="card-img-top"
                 alt={this.props.informacion.name}/>
+            </Link>
             <div className="cardBody">
                 <h5 className="card-title">{this.props.informacion.name}</h5>
                 <p className={"card-text " + this.state.textoClase}> {this.props.informacion.overview}.</p>

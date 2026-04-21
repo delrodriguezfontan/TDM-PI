@@ -10,6 +10,7 @@ import { Route , Switch} from "react-router-dom";
 import Register from "./components/Register/Register";
 import Login from "./components/Login/Login";
 import NotFound from "./components/NotFound/NotFound";
+import DetallesCard from "./components/DetallesCard/DetallesCard";
 
 
 class App  extends Component {
@@ -30,6 +31,7 @@ class App  extends Component {
         <Route path="/series" component={Series} />
         <Route path="/register" component={Register} />
         <Route path="/login" component={Login} />
+        <Route path="/detalleCard/:id/:tipo" component={DetallesCard}/>
         <Route path="" component={NotFound} />
         
       </Switch>
