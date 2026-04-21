@@ -9,7 +9,7 @@ class Peliculas extends Component {
       peliculas: [],
       page: 1,
       loading: true,
-      busqueda: ""
+      busqueda: "", 
     };
   }
 
@@ -23,7 +23,7 @@ class Peliculas extends Component {
         this.setState({
           peliculas: data.results,
           page: 2,
-          loading: false
+          loading: false,
         });
       })
       .catch((error) => console.log(error));
@@ -53,11 +53,11 @@ class Peliculas extends Component {
         event.preventDefault();
     }
 
+    
+
   render() {
 
-    let peliculasFiltradas = (this.state.busqueda === "")  ? this.state.peliculas : (this.state.peliculas.filter((pelicula) => pelicula.title === this.state.busqueda))
-
-    let contenido = (this.state.cargando === true) ? <p>Cargando...</p> : this.state.peliculas.map((informacion) => (
+    let contenido = (this.state.loading === true) ? <p>Cargando...</p> : this.state.peliculas.map((informacion) => (
       <CardPelicula key={informacion.id} informacion={informacion} tipo="movie" />
 
     ));
@@ -74,7 +74,7 @@ class Peliculas extends Component {
                 value={this.state.busqueda}
                 placeholder = "Buscar..." />
 
-              <button onClick={() => this.state.peliculas}>Buscar </button>
+              <button onClick={() => this.filtrarPeliculas()}> Buscar </button>
           
     </form>
        
@@ -87,6 +87,6 @@ class Peliculas extends Component {
       </React.Fragment>
     );
   }
-}
 
+}
 export default Peliculas;

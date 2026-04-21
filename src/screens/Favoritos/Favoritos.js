@@ -94,7 +94,7 @@ class Favoritos extends Component {
                 (<CardSerie key={serie.id} informacion={serie} />))
 
         let contenido = (this.state.peliculasFavoritas.length === 0)
-            ? <p>No hay resultados...</p>
+            ? <p>No tenes peliculas favoritas</p>
             : (
                 <div>
                     <h2 className="alert alert-primary">Películas favoritas</h2>
@@ -105,7 +105,7 @@ class Favoritos extends Component {
             );
 
         let contenidoSeries = (this.state.seriesFavoritas.length === 0)
-            ? <p>No hay resultados...</p>
+            ? <p>No tenes series favoritas</p>
             : (
                 <div>
                     <h2 className="alert alert-warning">Series favoritas</h2>
