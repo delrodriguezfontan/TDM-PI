@@ -1,27 +1,18 @@
-import React, { Component } from "react";
+import React, { Component, useEffect } from "react";
 import CardPelicula from "../../components/CardPelicula/CardPelicula";
 import CardSerie from "../../components/CardSerie/CardSerie";
-import Cookies from "universal-cookie";
 
-const cookies = new Cookies();
 
-class Favoritos extends Component {
-    constructor(props) {
-        super(props);
+function Favoritos() {
+    const [peliculasFavoritas, setPeliculasFavoritas] = useState([])
+    const [seriesFavoritas, setSeriesFavoritas] = useState([])
+    const [tipo, setBusqueda] = useState("pelicula")
+    const [cargandoPelis, setCargandoPelis] = useState(true)
+    const [cargandoSeries, setCargandoSeries] = useState(true)
 
-        this.state = {
-            peliculasFavoritas: [],
-            seriesFavoritas: [],
-            tipo: "pelicula",
-            cargandoPelis: true,
-            cargandoSeries: true
-        }
 
-    };
-    componentDidMount() {
-
+    useEffect(() => {
         let favoritasPelis = localStorage.getItem("favoritosPeliculas") == null ? [] : JSON.parse(localStorage.getItem("favoritosPeliculas"));
-        console.log(favoritasPelis);
 
         const apiKey = "94180faf61f8ab976c73db3b0fed85bc";
 
@@ -33,101 +24,82 @@ class Favoritos extends Component {
                 .then(data => {
                     nuevoArrayPeliculas.push(data)
 
-                    this.setState({
-                        peliculasFavoritas: nuevoArrayPeliculas,
+                    setPeliculasFavoritas(nuevoArrayPeliculas)
+
+                        .catch(error => console.log(error))
+
+                    setCargandoPelis(false)
 
 
-                    });
+                    let favoritasTv = localStorage.getItem("favoritosSeries") == null ? [] : JSON.parse(localStorage.getItem("favoritosSeries"));
+
+                    let nuevoArraySeries = [];
+
+                    favoritasTv.map(id =>
+                        fetch(`https://api.themoviedb.org/3/tv/${id}?api_key=${apiKey}&language=es-ES`)
+                            .then(res => res.json())
+                            .then(data => {
+                                nuevoArraySeries.push(data)
+
+                                setSeriesFavoritas(nuevoArraySeries)
+
+                            })
+                            .catch(error => console.log(error))
+                    )
+
+                    setCargandoSeries(false)
+                }), [])
+    })
 
 
-
-                })
-
-                .catch(error => console.log(error))
-
-        )
-
-        this.setState({
-            cargandoPelis: false
-        })
-
-        let favoritasTv = localStorage.getItem("favoritosSeries") == null ? [] : JSON.parse(localStorage.getItem("favoritosSeries"));
-
-        let nuevoArraySeries = [];
-
-        favoritasTv.map(id =>
-            fetch(`https://api.themoviedb.org/3/tv/${id}?api_key=${apiKey}&language=es-ES`)
-                .then(res => res.json())
-                .then(data => {
-                    nuevoArraySeries.push(data)
-
-                    this.setState({
-                        seriesFavoritas: nuevoArraySeries,
+    let listadoPelis = (cargandoPelis)
+        ? <h4>Cargando...</h4> : peliculasFavoritas.map(pelicula =>
+            (<CardPelicula key={pelicula.id} informacion={pelicula} />));
 
 
-                    });
-                })
-                .catch(error => console.log(error))
-        )
+    let listadoSeries = (cargandoPelis)
+        ? <h4>Cargando...</h4> : seriesFavoritas.map(serie =>
+            (<CardSerie key={serie.id} informacion={serie} />))
 
-        this.setState({
-            cargandoSeries: false
-        })
-
-
-    };
-
-    render() {
-
-        console.log(this.state.peliculasFavoritas);
-
-
-
-
-        let listadoPelis = (this.state.cargandoPelis)
-            ? <h4>Cargando...</h4> : this.state.peliculasFavoritas.map(pelicula =>
-                (<CardPelicula key={pelicula.id} informacion={pelicula} />));
-
-
-        let listadoSeries = (this.state.cargandoPelis)
-            ? <h4>Cargando...</h4> : this.state.seriesFavoritas.map(serie =>
-                (<CardSerie key={serie.id} informacion={serie} />))
-
-        let contenido = (this.state.peliculasFavoritas.length === 0)
-            ? <p>No tenes peliculas favoritas</p>
-            : (
-                <div>
-                    <h2 className="alert alert-primary">Películas favoritas</h2>
-                    <section class="row cards" id="movies">
-                        {listadoPelis}
-                    </section>
-                </div>
-            );
-
-        let contenidoSeries = (this.state.seriesFavoritas.length === 0)
-            ? <p>No tenes series favoritas</p>
-            : (
-                <div>
-                    <h2 className="alert alert-warning">Series favoritas</h2>
-                    <section className="row cards" id="tv-show">
-                        {listadoSeries}
-                    </section>
-
-                </div>
-            );
-
-        return (
-            <div className="container">
-                {contenido}
-                {contenidoSeries}
-
+    let contenido = (peliculasFavoritas.length === 0)
+        ? <p>No tenes peliculas favoritas</p>
+        : (
+            <div>
+                <h2 className="alert alert-primary">Películas favoritas</h2>
+                <section class="row cards" id="movies">
+                    {listadoPelis}
+                </section>
             </div>
         );
-    }
+
+    let contenidoSeries = (seriesFavoritas.length === 0)
+        ? <p>No tenes series favoritas</p>
+        : (
+            <div>
+                <h2 className="alert alert-warning">Series favoritas</h2>
+                <section className="row cards" id="tv-show">
+                    {listadoSeries}
+                </section>
+            </div>
+        );
+
+
+return (
+        <div className="container">
+            {contenido}
+            {contenidoSeries}
+
+        </div>
+    );
+
+
+};
 
 
 
-}
+
+
+
 
 
 export default Favoritos; 
