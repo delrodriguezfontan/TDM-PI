@@ -1,7 +1,7 @@
 import React, { Component, useEffect } from "react";
 import CardSerie from "../../components/CardSerie/CardSerie";
 
-function Series() {
+function Series(props) {
     const [series, setSeries] = useState([])
     const [page, setPage] = useState(1)
     const [cargando, setCargando] = useState(true)

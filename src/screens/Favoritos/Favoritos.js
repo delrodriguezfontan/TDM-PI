@@ -3,7 +3,7 @@ import CardPelicula from "../../components/CardPelicula/CardPelicula";
 import CardSerie from "../../components/CardSerie/CardSerie";
 
 
-function Favoritos() {
+function Favoritos(props) {
     const [peliculasFavoritas, setPeliculasFavoritas] = useState([])
     const [seriesFavoritas, setSeriesFavoritas] = useState([])
     const [tipo, setBusqueda] = useState("pelicula")

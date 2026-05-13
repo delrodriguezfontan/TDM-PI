@@ -2,7 +2,7 @@ import React, { Component, useEffect } from "react";
 import CardPelicula from "../../components/CardPelicula/CardPelicula";
 
 
-function Peliculas() {
+function Peliculas(props) {
   const [peliculas, setPeliculas] = useState([])
   const [page, setPage] = useState(1)
   const [loading, setLoading] = useState(true)
